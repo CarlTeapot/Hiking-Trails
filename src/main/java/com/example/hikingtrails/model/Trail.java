@@ -1,12 +1,17 @@
 package com.example.hikingtrails.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.mapping.Property;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -79,9 +84,16 @@ public class Trail {
     @JsonProperty("elevation")
     private String elevation;
 
-    @Column(nullable = false)
-    @JsonProperty("landmarks")
-    private String landmarks;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "trail_landmarks",
+            joinColumns = { @JoinColumn(name = "trail_id") },
+            inverseJoinColumns = { @JoinColumn(name = "landmark_id") })
+    @JsonIgnore
+    private Set<LandMark> properties = new HashSet<>();
 
     @Column(nullable = false)
     @JsonProperty("infrastructure")
