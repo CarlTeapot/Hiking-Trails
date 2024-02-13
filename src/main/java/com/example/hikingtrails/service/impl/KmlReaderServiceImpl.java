@@ -76,7 +76,7 @@ public class KmlReaderServiceImpl implements KmlReaderService {
         trail.setLength(getData(dataList,8));
         trail.setDuration(getData(dataList,9));
         trail.setElevation(getData(dataList,10));
-        trail.setLandmarks(getData(dataList,11));
+//        trail.setLandmarks(getData(dataList,11));
         trail.setInfrastructure(getData(dataList,12));
         trail.setMarked(getData(dataList,13));
         trail.setCrossesAgency(getData(dataList,14));

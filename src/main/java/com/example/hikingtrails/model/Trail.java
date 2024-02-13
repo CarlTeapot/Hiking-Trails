@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.mapping.Property;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -93,7 +92,7 @@ public class Trail {
             joinColumns = { @JoinColumn(name = "trail_id") },
             inverseJoinColumns = { @JoinColumn(name = "landmark_id") })
     @JsonIgnore
-    private Set<LandMark> properties = new HashSet<>();
+    private Set<Landmark> properties = new HashSet<>();
 
     @Column(nullable = false)
     @JsonProperty("infrastructure")
