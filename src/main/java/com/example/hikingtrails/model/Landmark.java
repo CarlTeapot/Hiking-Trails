@@ -1,28 +1,31 @@
 package com.example.hikingtrails.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Landmark {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String landmark;
+    private String name;
 
-    @ManyToMany(mappedBy = "trails")
-    private Set<Trail> trails = new HashSet<>();
+    @ManyToMany(mappedBy = "landmarks")
+    private Set<Trail> trails;
+
+    public Landmark(String name) {
+
+        this.name = name;
+        trails = new HashSet<>();
+    }
 }

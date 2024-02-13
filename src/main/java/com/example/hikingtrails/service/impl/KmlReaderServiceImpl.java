@@ -1,8 +1,10 @@
 package com.example.hikingtrails.service.impl;
 
 import com.example.hikingtrails.model.Description;
+import com.example.hikingtrails.model.Landmark;
 import com.example.hikingtrails.model.Trail;
 import com.example.hikingtrails.repository.DescriptionRepository;
+import com.example.hikingtrails.repository.LandmarkRepository;
 import com.example.hikingtrails.repository.TrailRepository;
 import com.example.hikingtrails.service.KmlReaderService;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +18,17 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Qualifier("impl1")
 @Service
 @RequiredArgsConstructor
 public class KmlReaderServiceImpl implements KmlReaderService {
-    final TrailRepository repository;
-    final DescriptionRepository repo;
+   private final TrailRepository repository;
+   private final DescriptionRepository descriptionRepository;
+   private final LandmarkRepository landmarkRepository;
     @Override
     public void read() {
         try {
@@ -76,18 +81,41 @@ public class KmlReaderServiceImpl implements KmlReaderService {
         trail.setLength(getData(dataList,8));
         trail.setDuration(getData(dataList,9));
         trail.setElevation(getData(dataList,10));
-//        trail.setLandmarks(getData(dataList,11));
+
+        addLandMark(getData(dataList,11),trail);
+
         trail.setInfrastructure(getData(dataList,12));
         trail.setMarked(getData(dataList,13));
         trail.setCrossesAgency(getData(dataList,14));
         trail.setOrganization(getData(dataList,15));
+
         Description description = new Description();
         description.setText(getData(dataList,16));
-        repo.save(description);
+        descriptionRepository.save(description);
         trail.setDescription(description);
         System.out.println(coordinates);
         trail.setCoordinates(coordinates);
         return trail;
+    }
+    private void addLandMark(String landmarks, Trail trail) {
+        String[] landMarks;
+        if (landmarks.contains(";"))
+             landMarks = landmarks.split(";");
+        else
+            landMarks = landmarks.split(",");
+
+        Set<Landmark> landmarkSet = new HashSet<>();
+        for (String landmark : landMarks) {
+            Landmark landmark1;
+            Optional<Landmark> optional= landmarkRepository.getLandmarkByName(landmark);
+            landmark1 = optional.orElseGet(() -> new Landmark(landmark));
+            Set<Trail> temp = landmark1.getTrails();
+            temp.add(trail);
+            landmark1.setTrails(temp);
+            landmarkSet.add(landmark1);
+            landmarkRepository.save(landmark1);
+        }
+        trail.setLandmarks(landmarkSet);
     }
     private String getData(NodeList node, int i) {
 

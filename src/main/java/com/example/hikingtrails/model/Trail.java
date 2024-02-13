@@ -92,7 +92,7 @@ public class Trail {
             joinColumns = { @JoinColumn(name = "trail_id") },
             inverseJoinColumns = { @JoinColumn(name = "landmark_id") })
     @JsonIgnore
-    private Set<Landmark> properties = new HashSet<>();
+    private Set<Landmark> landmarks = new HashSet<>();
 
     @Column(nullable = false)
     @JsonProperty("infrastructure")

@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface DescriptionRepository extends JpaRepository<Description, Long> {
     public Optional<Description> getDescriptionById(Long id);
 
-    public Optional<Description> findDescriptionByTrailId(Long id);
 }

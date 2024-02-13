@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface LandmarkRepository extends JpaRepository<Landmark, Long> {
     public Optional<Landmark> getLandmarkById(Long id);
 
+    public Optional<Landmark> getLandmarkByName(String name);
+
     public List<Landmark> getLandmarksByTrailsId (Long id);
 }
