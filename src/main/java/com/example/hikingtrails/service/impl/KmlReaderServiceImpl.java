@@ -48,9 +48,7 @@ public class KmlReaderServiceImpl implements KmlReaderService {
                 NodeList placemarkList = folderNode.getElementsByTagName("Placemark");
                 NodeList nameList = folderNode.getElementsByTagName("name");
                 String region = nameList.item(0).getTextContent();
-
                 for (int j = 0; j < placemarkList.getLength(); j++) {
-
                     Element placemarkNode = (Element) placemarkList.item(j);
                     NodeList names = placemarkNode.getElementsByTagName("name");
                     String trailName = names.item(0).getTextContent();
@@ -59,7 +57,9 @@ public class KmlReaderServiceImpl implements KmlReaderService {
                     String coordinates = coordinatesList.item(0).getTextContent();
                     repository.save(createTrail("Georgia", region, trailName, dataList, coordinates));
                 }
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
