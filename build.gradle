@@ -31,7 +31,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	// https://mvnrepository.com/artifact/com.google.maps/google-maps-services
 	implementation 'com.google.maps:google-maps-services:2.2.0'
-	implementation 'com.google.earth.kml:javakml:1.3.2'
+	// https://mvnrepository.com/artifact/org.jdom/jdom2
+	implementation group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
+
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 	compileOnly 'org.projectlombok:lombok:1.18.30'

@@ -2,6 +2,11 @@ package com.example.hikingtrails.service;
 
 import com.example.hikingtrails.model.Trail;
 
+import java.io.File;
+import java.io.IOException;
+
 public interface KmlGeneratorService {
-    public Object generateKml(Trail trail);
+    public File generateKml(String name);
+    public File generate2(String trailname) throws IOException;
 }
+
