@@ -13,8 +13,8 @@ ALTER TABLE trails ALTER COLUMN coordinates TYPE TEXT;
 ALTER TABLE description ALTER COLUMN text TYPE TEXT;
 
 Used Technologies:
-Spring boot
-Git
-Hibernate
-Gradle
+Spring boot,
+Git,
+Hibernate,
+Gradle,
 
