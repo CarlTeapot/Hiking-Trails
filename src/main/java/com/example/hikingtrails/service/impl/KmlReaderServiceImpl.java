@@ -32,7 +32,7 @@ public class KmlReaderServiceImpl implements KmlReaderService {
     @Override
     public void read() {
         try {
-            File kmlFile = new File("C:\\Users\\u\\Desktop\\Hiking\\trails2.kml");
+            File kmlFile = new File("trails.kml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(kmlFile);

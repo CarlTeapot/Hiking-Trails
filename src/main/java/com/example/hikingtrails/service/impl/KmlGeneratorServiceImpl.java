@@ -79,37 +79,4 @@ public class KmlGeneratorServiceImpl implements KmlGeneratorService {
         }
         return testexists;
     }
-
-    @Override
-    public File generate2(String trailName) throws IOException {
-        Optional<Trail> opttrail = trailRepository.getTrailByTrailName(trailName);
-        Trail trail = opttrail.get();
-        String datapath = "C:\\Users\\u\\Desktop\\Hiking\\";
-
-        // Create JDOM Document
-        Document document = new Document();
-
-        // Create root element <kml>
-        Element kmlElement = new Element("kml", Namespace.getNamespace("http://www.opengis.net/kml/2.2"));
-        document.addContent(kmlElement);
-
-        // Create child element <Document>
-        Element documentElement = new Element("Document", trailName);
-        kmlElement.addContent(documentElement);
-
-        // Create child element <Placemark>
-        Element placemarkElement = new Element("Placemark", trailName);
-        documentElement.addContent(placemarkElement);
-
-        // Create child element <Point> with <coordinates>
-        Element coordinatesElement = new Element("coordinates", kmlElement.getNamespace());
-
-        // Write KML document to file
-        File file = new File(datapath + "/" + trail.getTrailName() + ".kml");
-        FileWriter writer = new FileWriter(file);
-        new XMLOutputter().output(document, writer);
-        writer.close();
-
-        return file;
-    }
 }

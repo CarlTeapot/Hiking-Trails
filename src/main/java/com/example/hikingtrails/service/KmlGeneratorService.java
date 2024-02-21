@@ -7,6 +7,5 @@ import java.io.IOException;
 
 public interface KmlGeneratorService {
     public File generateKml(String name);
-    public File generate2(String trailname) throws IOException;
 }
 
