@@ -5,10 +5,10 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
-	sourceCompatibility = '21'
+	sourceCompatibility = '19'
 }
 
 configurations {
@@ -49,6 +49,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+}
+build{
+
+}
+bootBuildImage {
+	imageName = 'hiking' // Specify the image name here
 }
 
 tasks.named('test') {
